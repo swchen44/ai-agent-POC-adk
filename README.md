@@ -1,4 +1,3 @@
-# README.md
 # ADK Multi-Agent POC
 
 This project demonstrates a multi-agent system using Google ADK.
