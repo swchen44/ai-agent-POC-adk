@@ -1,0 +1,8 @@
+default_model: openai/gpt-4
+model_list:
+  - model_name: openai/gpt-4
+    litellm_provider: openai
+    api_key: $OPENAI_API_KEY
+  - model_name: ollama/llama3
+    litellm_provider: ollama
+    api_base: http://localhost:11434
