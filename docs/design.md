@@ -44,26 +44,53 @@ Each agent receives shared `state`, enriching or transforming it:
 
 ---
 
-## 🔍 Key Design Concepts
+## 🧪 CI/CD Integration
 
-### ✅ Prompt as Code
-Each agent uses its own `prompt.py` file, enabling programmatic prompt generation or dynamic parameter injection.
+You can integrate test coverage into GitHub Actions with the following:
 
-### ✅ SequentialAgent Composition
-A `SequentialAgent` composes the three functional agents, passing shared state in order.
-
-### ✅ Model Agnosticism
-Uses `LITELLM_MODEL` to swap providers like OpenAI, Ollama, Anthropic without code changes.
+```yaml
+# .github/workflows/test.yml
+name: Test Prompts
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: pip install -r requirements.txt
+      - run: pytest tests/
+```
 
 ---
 
-## 📌 Design Trade-offs
+## 🧠 Use Cases
 
-| Trade-off                     | Benefit                                    | Limitation                               |
-|------------------------------|--------------------------------------------|-------------------------------------------|
-| Fine-grained agents          | High flexibility and modularity            | Higher implementation overhead            |
-| Prompt-driven logic          | Easy to iterate and evolve instructions    | Less deterministic without control flows |
-| Model-pluggability           | Use local/cloud models easily              | Slight complexity in `.env` configuration |
+- Embedded system design co-piloting (e.g. Wi-Fi stack planning)
+- Multi-stage software architecture design (requirements → modules)
+- Educational systems teaching V-Model using LLMs
+- Prompt engineering research on delegation and role-play
+
+---
+
+## 📊 Model Comparison (LiteLLM Backend)
+
+| Provider   | Model            | Speed (tokens/sec) | Cost (est)      | Notes                       |
+|------------|------------------|---------------------|------------------|-----------------------------|
+| OpenAI     | `gpt-4`          | ⏳ slow (~15/s)     | 💸 High           | Very accurate, verbose      |
+| OpenAI     | `gpt-3.5`        | ⚡ fast (~60/s)     | ✅ Low            | Less context window         |
+| Ollama     | `llama3` local   | ⚡⚡ local (~80/s)   | 🆓 Free (CPU/GPU) | Can be run offline          |
+| Anthropic  | `claude-3-opus`  | ⏳ medium (~20/s)   | 💸 High           | Good for summarization      |
+
+---
+
+## 📸 Screenshot Example (Web UI)
+
+![ADK Web UI](https://raw.githubusercontent.com/google/adk-samples/main/images/web-ui.png)
+
+> Note: Image is for illustration; replace with your live version if hosted.
 
 ---
 
@@ -83,20 +110,7 @@ Uses `LITELLM_MODEL` to swap providers like OpenAI, Ollama, Anthropic without co
 - [ ] Integrate `tests/` with CI/CD pipeline (GitHub Actions)
 - [ ] Add API layer for embedding in external workflows
 - [ ] Memory persistence across sessions
-
----
-
-## 🧠 Use Cases
-
-- Embedded system design co-piloting (e.g. Wi-Fi stack planning)
-- Multi-stage software architecture design (requirements → modules)
-- Educational systems teaching V-Model using LLMs
-- Prompt engineering research on delegation and role-play
-
----
-
-## 📸 Screenshot Example (Web UI)
-> _(Insert screenshot of ADK web interface here)_
+- [ ] Auto-evaluation of generated code (unit tests)
 
 ---
 
