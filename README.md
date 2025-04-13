@@ -57,6 +57,18 @@ pytest
 adk run .
 ```
 
+## 🌐 ADK Web UI (Browser Interface)
+ADK also provides a built-in web interface for interactive testing:
+
+```bash
+adk web .
+```
+- Launches a local web server (e.g. http://localhost:8080)
+- Uses `adk.yaml` to detect root agent
+- Allows live dialogue with the multi-agent workflow via browser
+
+
+
 ## 🔐 Environment Configuration
 `.env.example` is provided. You must set at least:
 ```dotenv
